@@ -140,7 +140,7 @@ const valorInput = () => {
     buscar.value = '';
 }
 
-window.addEventListener('DOMContentLoaded', async () => { 
+window.addEventListener('load', async () => { 
     try {
         console.log('Inicio netlify');
         const response = await fetch('/.netlify/functions/env');
@@ -148,7 +148,6 @@ window.addEventListener('DOMContentLoaded', async () => {
           throw new Error('Network response was not ok');
         }
         apiKey = await response.text();
-        console.log('Final netlify', apiKey);
       } catch (error) {
         console.error('Error en obtener la variable de entorno.', error);
       }
