@@ -1,4 +1,4 @@
-const apiKey = '';
+let apiKey = '';
 // Elementos HTML para interactuar
 const buscar = document.getElementById('buscar');
 const btnBuscar = document.getElementById('btn_buscar');
@@ -140,8 +140,23 @@ const valorInput = () => {
     buscar.value = '';
 }
 
-window.addEventListener('load', () => {
-    clima(ciudad)
+window.addEventListener('DOMContentLoaded', async () => { 
+    try {
+        console.log('Inicio netlify');
+        const response = await fetch('/.netlify/functions/env');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        apiKey = await response.text();
+        console.log('Final netlify', apiKey);
+      } catch (error) {
+        console.error('Error en obtener la variable de entorno.', error);
+      }
+    
+      // Llama a la función clima después de obtener la API Key
+      if (apiKey) {
+        clima(ciudad, apiKey);
+      }
 })
 
 btnBuscar.addEventListener('click', () => {

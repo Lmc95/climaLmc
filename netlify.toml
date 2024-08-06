@@ -1,0 +1,8 @@
+[build]
+  functions = "functions/"
+
+[[redirects]]
+  from = "/netlify/functions/env"
+  to = "/.netlify/functions/env"
+  status = 200
+  force = true
