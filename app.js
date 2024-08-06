@@ -156,8 +156,8 @@ window.addEventListener('load', async () => {
         if (apiKey) {
             clima(ciudad);
             animacionCarga.style.display = 'none';
-            document.querySelector('.titulo_app').style.display = 'block';
-            document.querySelector('.cont_clima').style.display = 'block';
+            document.querySelector('.titulo_app').style.opacity = '100%';
+            document.querySelector('.cont_clima').style.opacity = '100%';
         }
     }, 3000);
 })
