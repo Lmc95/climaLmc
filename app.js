@@ -152,14 +152,15 @@ window.addEventListener('load', async () => {
       }
     
       // Llama a la función clima después de obtener la API Key
-      setTimeout(() => {
-        if (apiKey) {
-            clima(ciudad);
+      
+    if (apiKey) {
+        clima(ciudad);
+        setTimeout(() => {
             animacionCarga.style.display = 'none';
             document.querySelector('.titulo_app').style.opacity = '100%';
             document.querySelector('.cont_clima').style.opacity = '100%';
-        }
-    }, 3000);
+        }, 3000);
+    }
 })
 
 btnBuscar.addEventListener('click', () => {
