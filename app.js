@@ -38,7 +38,7 @@ const listTormenta = [1087, 1273, 1276, 1279, 1282];
 // Información que se mostrara predeterminada al abrir la página.
 const clima = async (city) => {
     try {
-        const datosPredeterminados = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&lang=es&days=4`)
+        const datosPredeterminados = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&lang=es&days=4`)
         const datos = await datosPredeterminados.json();
         console.log(datos);
         let codigo = datos.current.condition.code;
