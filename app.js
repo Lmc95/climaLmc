@@ -155,7 +155,7 @@ window.addEventListener('load', async () => {
       setTimeout(() => {
         if (apiKey) {
             clima(ciudad);
-            loader.style.display = 'none';
+            animacionCarga.style.display = 'none';
             document.querySelector('.titulo_app').style.display = 'block';
             document.querySelector('.cont_clima').style.display = 'block';
         }
