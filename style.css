@@ -27,9 +27,22 @@ li {
 p {
     font-size: .90;
 }
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #c9c9c9;
+    -webkit-mask: radial-gradient(circle closest-side at 50% 40%,#0000 94%, #000);
+    transform-origin: 50% 40%;
+    animation: l25 1s infinite linear;
+  }
+  @keyframes l25 {
+    100% {transform: rotate(1turn)}
+  }
 .titulo_app {
     margin-bottom: 50px;
     text-decoration: underline;
+    display: none;
 }
 .cont_clima {
     background-color: #000000;
@@ -47,6 +60,7 @@ p {
     row-gap: 8px;
     position: relative;
     z-index: 1;
+    display: none;
 }
 .bg_clima {
     width: 100%;
@@ -55,7 +69,7 @@ p {
     opacity: 40%;
     z-index: 2;
     border-radius: 16px;
-    background-image: url('/assets/pexels-jplenio-1118873.jpg');
+    background-image: url('');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

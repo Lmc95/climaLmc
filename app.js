@@ -2,8 +2,7 @@ let apiKey = '';
 // Elementos HTML para interactuar
 const buscar = document.getElementById('buscar');
 const btnBuscar = document.getElementById('btn_buscar');
-const btnC = document.getElementById('btn_c');
-const btnF = document.getElementById('btn_f');
+const animacionCarga = document.querySelector('.loader');
 // Elementos HTML a cargar datos del clima (DIARIO)
 const ubicacion = document.getElementById('ubicacion');
 const fechaUbi = document.getElementById('fecha');
@@ -153,9 +152,14 @@ window.addEventListener('load', async () => {
       }
     
       // Llama a la función clima después de obtener la API Key
-      if (apiKey) {
-        clima(ciudad, apiKey);
-      }
+      setTimeout(() => {
+        if (apiKey) {
+            clima(ciudad);
+            loader.style.display = 'none';
+            document.querySelector('.titulo_app').style.display = 'block';
+            document.querySelector('.cont_clima').style.display = 'block';
+        }
+    }, 3000);
 })
 
 btnBuscar.addEventListener('click', () => {
