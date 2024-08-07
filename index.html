@@ -22,7 +22,15 @@
 
     <main>
         <div class="loader"></div>
-        <h1 class="titulo_app">App Clima</h1>
+        <div class="aviso">
+            <div class="msj">
+                <button id="btn_cerrar_aviso">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <p id="msj_aviso"></p>
+            </div>
+        </div>
+        <h1 class="titulo_app">Clima</h1>
 
         <section class="cont_clima">
             <div class="bg_clima"></div>
@@ -83,7 +91,11 @@
             </ul>
 
         </section>
+        <footer>
+            <p>© Lucas M. Carranza</p>
+        </footer>
     </main>
+    
 
     <script type="module" src="/app.js"></script>
 </body>

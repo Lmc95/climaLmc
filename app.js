@@ -3,6 +3,9 @@ let apiKey = '';
 const buscar = document.getElementById('buscar');
 const btnBuscar = document.getElementById('btn_buscar');
 const animacionCarga = document.querySelector('.loader');
+const btnCerrarAviso = document.getElementById('btn_cerrar_aviso');
+const aviso = document.querySelector('.aviso');
+const msjAviso = document.getElementById('msj_aviso');
 // Elementos HTML a cargar datos del clima (DIARIO)
 const ubicacion = document.getElementById('ubicacion');
 const fechaUbi = document.getElementById('fecha');
@@ -39,7 +42,7 @@ const clima = async (city) => {
     try {
         const datosPredeterminados = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&lang=es&days=4`)
         const datos = await datosPredeterminados.json();
-        console.log(datos);
+        // console.log(datos);
         let codigo = datos.current.condition.code;
         let esDia = datos.current.is_day;
 
@@ -55,6 +58,8 @@ const clima = async (city) => {
 
     } catch (error) {
         console.error('Error en la solicitud.', error);
+        msjAviso.textContent = 'La ciudad ingresada no es válida. Por favor, intente nuevamente.'
+        aviso.style.left = '0';
     }
 }
 
@@ -64,7 +69,7 @@ const cargarClima = (datosCLima, fecha, condicionDia, temp, st, hum, vie) => {
 
     // Obtener y cargar fecha de la ubicación actual.
     let fechaCompleta = datosCLima.location.localtime.split(' ');
-    console.log(fechaCompleta)
+    // console.log(fechaCompleta)
     let fechaLocal = fechaCompleta[0].split('-');
 
     // Clima diario
@@ -132,7 +137,9 @@ const condicionClima = (codigoClima, lluvia, nublado, soleado, tormenta, nieve, 
 const valorInput = () => {
     ciudad = buscar.value.toLowerCase();
     if (buscar.value == '') {
-        console.log('Input vacio, ingresa un valor.')
+        // console.log('Input vacio, ingresa un valor.')
+        msjAviso.textContent = 'Parece que olvidaste ingresar una ciudad. Por favor, inténtalo de nuevo';
+        aviso.style.left = '0';
     } else {
         clima(ciudad);
     }
@@ -141,18 +148,15 @@ const valorInput = () => {
 
 window.addEventListener('load', async () => { 
     try {
-        console.log('Inicio netlify');
         const response = await fetch('/.netlify/functions/env');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         apiKey = await response.text();
       } catch (error) {
-        console.error('Error en obtener la variable de entorno.', error);
+        console.error('Error en solicitud de la api.', error);
       }
-    
-      // Llama a la función clima después de obtener la API Key
-      
+    // Llama a la función clima después de obtener la API Key  
     if (apiKey) {
         clima(ciudad);
         setTimeout(() => {
@@ -172,4 +176,8 @@ buscar.addEventListener('keydown', (e) => {
     if (e.key == 'Enter') {
         valorInput();
     }
+})
+btnCerrarAviso.addEventListener('click', () => {
+    aviso.style.left = '-100%';
+    console.log('click')
 })
