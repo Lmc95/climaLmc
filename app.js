@@ -28,7 +28,7 @@ const imgDiaTres = document.getElementById('img_dia_3');
 const tempDiaTres = document.getElementById('temp_dia_3');
 
 let ciudad = 'rio cuarto';
-const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+const diasSemana = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
 // Codigos condiciones clima a optimizar -> (podria ser un objeto que cada categoria tenga su array).
 const listLluvias = [1063, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1240, 1243, 1246, 1273, 1276, 1237, 1264];
@@ -40,11 +40,12 @@ const listTormenta = [1087, 1273, 1276, 1279, 1282];
 // Información que se mostrara predeterminada al abrir la página.
 const clima = async (city) => {
     try {
-        const datosPredeterminados = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&lang=es&days=4`)
+        const datosPredeterminados = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&lang=es&days=3`)
         const datos = await datosPredeterminados.json();
         // console.log(datos);
         let codigo = datos.current.condition.code;
         let esDia = datos.current.is_day;
+        console.log(datos)
 
         // Carga el nombre de la ubicación
         if (datos.location.name === datos.location.region) {
@@ -82,22 +83,29 @@ const cargarClima = (datosCLima, fecha, condicionDia, temp, st, hum, vie) => {
  
     // Clima semanal
     let listDias = [];
-    for (let i = 1; i < climaSemana.length; i++) {
-        listDias.push(climaSemana[i].date);
-    }
+    // for (let i = 1; i < climaSemana.length; i++) {
+    //     listDias.push(climaSemana[i].date);
+    // }
+    climaSemana.forEach(element => {
+        listDias.push(element.date);
+    });
+    console.log('Lista dias')
+    console.log(listDias)
     let indiceDiaUno = new Date(listDias[0]).getDay();
     let indiceDiaDos = new Date(listDias[1]).getDay();
     let indiceDiaTres = new Date(listDias[2]).getDay();
+    console.log('Dia: ' + indiceDiaDos)
+    diaUno.innerHTML = 'Hoy';
+    imgDiaUno.src = climaSemana[0].day.condition.icon;
+    tempDiaUno.innerHTML = `${Math.round(climaSemana[0].day.maxtemp_c)}°c , ${Math.round(climaSemana[0].day.mintemp_c)}°c`;
 
-    diaUno.innerHTML = diasSemana[indiceDiaUno];
-    imgDiaUno.src = climaSemana[1].day.condition.icon;
-    tempDiaUno.innerHTML = `${Math.round(climaSemana[1].day.maxtemp_c)}°c , ${Math.round(climaSemana[1].day.mintemp_c)}°c`;
     diaDos.innerHTML = diasSemana[indiceDiaDos];
-    imgDiaDos.src = climaSemana[2].day.condition.icon;
-    tempDiaDos.innerHTML = `${Math.round(climaSemana[2].day.maxtemp_c)}°c , ${Math.round(climaSemana[2].day.mintemp_c)}°c`;
+    imgDiaDos.src = climaSemana[1].day.condition.icon;
+    tempDiaDos.innerHTML = `${Math.round(climaSemana[1].day.maxtemp_c)}°c , ${Math.round(climaSemana[1].day.mintemp_c)}°c`;
+
     diaTres.innerHTML = diasSemana[indiceDiaTres];
-    imgDiaTres.src = climaSemana[3].day.condition.icon;
-    tempDiaTres.innerHTML = `${Math.round(climaSemana[3].day.maxtemp_c)}°c , ${Math.round(climaSemana[3].day.mintemp_c)}°c`;
+    imgDiaTres.src = climaSemana[2].day.condition.icon;
+    tempDiaTres.innerHTML = `${Math.round(climaSemana[2].day.maxtemp_c)}°c , ${Math.round(climaSemana[2].day.mintemp_c)}°c`;
 
 }
 
