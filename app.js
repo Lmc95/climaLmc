@@ -27,7 +27,7 @@ const diaTres = document.getElementById('dia_3');
 const imgDiaTres = document.getElementById('img_dia_3');
 const tempDiaTres = document.getElementById('temp_dia_3');
 
-let ciudad = 'rio cuarto';
+let ciudad = 'buenos aires';
 const diasSemana = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
 // Codigos condiciones clima a optimizar -> (podria ser un objeto que cada categoria tenga su array).
